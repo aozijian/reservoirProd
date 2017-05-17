@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.reservoir.service.mapper.system.RoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.nit.reservoir.service.model.system.RoleMenu">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--增-->
+    <insert id="insert" parameterType="com.qiniu.fntv.service.model.system.RoleMenu">
+        INSERT INTO t_s_role_menu (
+        id,role_id,menu_id
+        )
+        VALUES
+        (
+        #{id},
+        #{roleId},
+        #{menuId}
+        )
+    </insert>
+
+    <!--删-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        DELETE FROM t_s_role_menu
+        WHERE id = #{id}
+    </delete>
+
+    <!--查-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM t_s_role_menu
+        WHERE id = #{id}
+    </select>
+
+    <!--根据角色ID查询一级菜单-->
+    <select id="selectFirstByRoleId" resultType="map"  parameterType="java.lang.String">
+        SELECT
+        b.*
+        FROM t_s_role_menu a
+        LEFT OUTER JOIN t_s_menu b ON b.id = a.menu_id
+        WHERE b.parent_id = '10000002-0000-0000-0000-000000000000'
+        AND a.role_id = #{roleId}
+        ORDER BY b.sort_id
+    </select>
+</mapper>

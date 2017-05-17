@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by aozijian on 2017/5/16.
+ * 用户实体类
  */
 public class User implements Serializable{
 

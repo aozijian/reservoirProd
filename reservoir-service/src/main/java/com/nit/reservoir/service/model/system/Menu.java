@@ -1,22 +1,29 @@
 package com.nit.reservoir.service.model.system;
 
 
-import com.nit.reservoir.service.model.common.BasicModel;
-
 import java.io.Serializable;
 
 /**
  * Created by aozijian on 2017/4/20.
  * 菜单实体类
  */
-public class Menu extends BasicModel implements Serializable{
+public class Menu implements Serializable{
 
+    private String id;  //菜单ID
     private int sortId;  //排序ID
     private String parentId;  //菜单父ID
     private String name;  //菜单名称
     private String url;  //菜单链接地址
     private String description;  //菜单描述
     private Menu parentMenu;  //父级菜单
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getSortId() {
         return sortId;

@@ -1,18 +1,24 @@
 package com.nit.reservoir.service.model.system;
 
-import com.nit.reservoir.service.model.common.BasicModel;
-
 import java.io.Serializable;
 
 /**
- * 角色菜单关联实体类
- * Created by Charlie on 2016-11-21.
+ * Created by aozijian on 2017/5/18.
+ * 角色-菜单关联实体类
  */
-public class RoleMenu extends BasicModel implements Serializable {
-    private static final long serialVersionUID = -6018652411110501953L;
+public class RoleMenu implements Serializable{
 
+    private String id;  //ID
     private String roleId;  //角色ID
     private String menuId;  //菜单ID
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getRoleId() {
         return roleId;
