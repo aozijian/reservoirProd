@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+       default-lazy-init="false">
+
+    <!-- alibaba数据源 -->
+    <bean name="MySQLDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 数据源名称 -->
+        <property name="name" value="SQLServerDruid"/>
+        <!-- 基本链接 -->
+        <property name="driverClassName" value="${framework.mysql_driver_class_name}"/>
+        <property name="url" value="${framework.mysql_jdbc_url}"/>
+        <property name="username" value="${framework.mysql_jdbc_username}"/>
+        <property name="password" value="${framework.mysql_jdbc_password}"/>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${framework.jdbc.initialSize}"/>
+        <property name="minIdle" value="${framework.jdbc.minIdle}"/>
+        <property name="maxActive" value="${framework.jdbc.maxActive}"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${framework.jdbc.maxWait}"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${framework.jdbc.timeBetweenEvictionRunsMillis}"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${framework.jdbc.minEvictableIdleTimeMillis}"/>
+        <!-- PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+        <!-- 用来检测连接是否有效的sql，要求是一个查询语句。-->
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 配置监控统计拦截的filters 防止SQL注入,监控 -->
+        <!-- <property name="filters" value="stat" /> -->
+        <!-- 配置监控统计拦截的filters 输出日志 -->
+        <property name="filters" value="log4j" />
+    </bean>
+
+    <!-- sessionfactory -->
+    <bean id="MySQLSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="MySQLDataSource"/>
+        <!-- 显式指定Mapper XML文件位置 -->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mapper/xml/*/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- mybatis mapper自动扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.nit.reservoir.service.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="MySQLSessionFactory"/>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="MySQLTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="MySQLDataSource"/>
+    </bean>
+    <!-- 注解方式配置事务-->
+    <tx:annotation-driven transaction-manager="MySQLTransactionManager"/>
+    <!-- 事务管理  -->
+    <tx:advice id="MyFrameworkTxAdvice" transaction-manager="MySQLTransactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="del*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="remove*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="modify*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="deal*" propagation="REQUIRED" read-only="false"/>
+
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="load*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="view*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.nit.reservoir.service.*.*(..))" />
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="MyFrameworkTxAdvice" />
+    </aop:config>
+</beans>

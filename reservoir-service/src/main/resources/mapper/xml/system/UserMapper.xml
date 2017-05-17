@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.reservoir.service.mapper.system.UserMapper">
+    <resultMap id="BaseResultMap" type="com.nit.reservoir.service.model.system.User">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="INTEGER" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+        <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modify_id" property="modifyId" jdbcType="INTEGER" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!--增加用户-->
+    <insert id="insert" parameterType="com.nit.reservoir.service.model.system.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_s_user
+        (user_name, password, gender, role_id, head_img, creator_id, create_time)
+        VALUES
+        (
+          #{userName},
+          #{password},
+          #{gender},
+          #{roleId},
+          #{headImg},
+          #{creatorId},
+          #{createTime}
+        )
+    </insert>
+
+    <!--删除用户-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM t_s_user
+        WHERE id = #{id}
+    </delete>
+
+    <!--修改用户-->
+    <update id="updateByPrimaryKey" parameterType="com.nit.reservoir.service.model.system.User">
+        UPDATE t_s_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg},
+            </if>
+            <if test="modifyId != null">
+                modify_id = #{modifyId},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--条件查询用户-->
+    <select id="selectByParams" resultMap="BaseResultMap">
+        SELECT * FROM t_s_user
+        WHERE 1 = 1
+        <if test="id != null and id != '' ">
+            AND id LIKE '%${id}%'
+        </if>
+        <if test="userName != null and userName != '' ">
+            AND user_name LIKE '%${userName}%'
+        </if>
+        <if test="gender != null and gender != '' ">
+            AND gender = #{gender}
+        </if>
+        <if test="roleId != null and roleId != '' ">
+            AND role_id = #{roleId}
+        </if>
+        LIMIT #{pageIndex, jdbcType=INTEGER},#{pageSize, jdbcType=INTEGER}
+    </select>
+
+    <!--根据用户名和密码查询，校验用户-->
+    <select id="checkUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM t_s_user
+        WHERE user_name = #{userName}
+        AND password = #{password}
+    </select>
+
+</mapper>

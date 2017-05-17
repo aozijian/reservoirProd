@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.reservoir.service.mapper.reservoir.ReservoirMapper">
+    <resultMap id="BaseResultMap" type="com.nit.reservoir.service.model.reservoir.Reservoir">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="location" property="location" jdbcType="VARCHAR" />
+        <result column="build_time" property="buildTime" jdbcType="TIMESTAMP" />
+        <result column="river" property="river" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="DOUBLE" />
+        <result column="pressure" property="pressure" jdbcType="DOUBLE" />
+        <result column="create_id" property="createId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modify_id" property="modifyId" jdbcType="INTEGER" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.nit.reservoir.service.model.reservoir.Reservoir">
+        INSERT INTO t_r_reservoir
+        (id,name,location,build_time,river,content,pressure,create_id,create_time)
+        VALUES
+        (
+        #{id},
+        #{name},
+        #{location},
+        #{buildTime},
+        #{river},
+        #{content},
+        #{pressure},
+        #{createId},
+        #{createTime}
+        )
+    </insert>
+
+    <!--带条件分页查询记录，按记录创建时间排序-->
+    <select id="selectByParams" resultType="map">
+        SELECT * FROM t_r_reservoir
+        WHERE 1 = 1
+        <if test="id != null and id != ''">
+            AND id LIKE '%${id}%'
+        </if>
+        <if test="name != null and name != ''">
+            AND name LIKE '%${name}%'
+        </if>
+        <if test="river != null and river != ''">
+            AND river LIKE '%${river}%'
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{pageIndex, jdbcType=INTEGER},#{pageSize, jdbcType=INTEGER}
+    </select>
+
+</mapper>

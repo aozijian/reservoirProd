@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+  <!-- 字符串过滤 -->
+  <filter>
+    <filter-name>charactorFilter</filter-name>
+    <filter-class>com.nit.reservoir.core.filter.CharacterFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>charactorFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Spring 监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- 指定Spring Bean的配置文件所在目录。默认配置在WEB-INF目录下 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/applicationContext.xml</param-value>
+  </context-param>
+
+  <!-- 配置Spring MVC DispatcherServlet -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring/springmvc-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 配置DispatcherServlet所需要拦截的 url -->
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!--会话超时时间为30分钟-->
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+
+  <!--配置默认页面-->
+  <welcome-file-list>
+    <welcome-file>/login/index.jsp</welcome-file>
+  </welcome-file-list>
+
+</web-app>

@@ -1,0 +1,87 @@
+/*本项目自定义或重写原有的样式表*/
+
+/*全局字体样式*/
+* {
+    font-family: "Microsoft YaHei UI";
+}
+
+/*全局图标大小样式*/
+i {
+    width: 14px;
+    height: 14px;
+}
+
+.float-e-margins .btn {
+    margin-bottom: 0;
+}
+
+/*用户资料相关样式*/
+/*用户资料页面用户头像样式*/
+.user-face {
+    padding: 10px;
+    border-radius: 50%;
+}
+
+/*表单检验输入框错误时的样式*/
+.form-control.error {
+    border: 1px solid #cc5965;
+}
+
+label.error {
+    padding-bottom: 2px;
+    color: #b94a48;
+}
+
+/*表格相关样式*/
+.table-responsive .btn-default {
+    background-color: #ffffff;
+    border-color: #c2c2c2;
+    color: inherit;
+}
+
+.table-responsive .enable {
+    color: #1ab394;
+}
+
+.table-responsive .disable {
+    color: #f8ac59;
+}
+.table-responsive tr {
+    cursor: pointer;
+}
+.wrapper-content {
+    padding: 5px 20px 0 20px;
+}
+.ibox-content .btns .btn{
+    margin-bottom: 5px;
+}
+
+/*自定义按钮样式*/
+
+.btn-black {
+    background-color: #2F4050;
+    border-color: #2F4050;
+    color: #FFF;
+}
+.btn-black.btn-outline {
+    color: #4d7f22
+}
+.btn-black.active, .btn-black:active, .btn-black:focus, .btn-black:hover, .open .dropdown-toggle.btn-black {
+    background-color: #2f4050;
+    border-color: #2f4050;
+    color: #FFF
+}
+.btn-black.active.focus, .btn-black.active:focus, .btn-black.active:hover, .btn-black:active.focus, .btn-black:active:focus, .btn-black:active:hover, .open > .dropdown-toggle.btn-black.focus, .open > .dropdown-toggle.btn-black:focus, .open > .dropdown-toggle.btn-black:hover {
+    color: #fff;
+    background-color: #333;
+    border-color: #333;
+}
+.btn-black.active[disabled], .btn-black.disabled, .btn-black.disabled.active, .btn-black.disabled:active, .btn-black.disabled:focus, .btn-black.disabled:hover, .btn-black[disabled], .btn-black[disabled]:active, .btn-black[disabled]:focus, .btn-black[disabled]:hover, fieldset[disabled] .btn-black, fieldset[disabled] .btn-black.active, fieldset[disabled] .btn-black:active, fieldset[disabled] .btn-black:focus, fieldset[disabled] .btn-black:hover {
+    background-color: #2f4050;
+    border-color: #2f4050
+}
+
+/*表单相关样式*/
+.pull-right {
+    margin-right: 2px;
+}
