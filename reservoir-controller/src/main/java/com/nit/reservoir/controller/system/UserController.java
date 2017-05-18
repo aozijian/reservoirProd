@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,17 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    /**
+     * 跳转到用户列表
+     * @return
+     */
+    @RequestMapping(value = "/jumpToList", method = RequestMethod.GET)
+    public ModelAndView jumpToList() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("system/userList");
+        return modelAndView;
+    }
 
     /**
      * 用户登录

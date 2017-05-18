@@ -31,8 +31,13 @@ public class RoleMenuServiceImpl extends AbstractServiceImpl<RoleMenu> implement
     }
 
     @Override
-    public List<Menu> selectFirstByRoleId(String roleId) {
+    public List<Menu> selectFirstByRoleId(int roleId) {
         return mapList2MenuList(roleMenuDao.selectFirstByRoleId(roleId));
+    }
+
+    @Override
+    public List<Menu> selectChildByParentIdAndRoleId(String parentId, int roleId) {
+        return mapList2MenuList(roleMenuDao.selectChildByParentIdAndRoleId(parentId, roleId));
     }
 
     public List<Menu> mapList2MenuList(List<Map<String, Object>> mapList) {

@@ -38,7 +38,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             if (null != session && session.getAttribute(Constants.GLOBAL_USER) != null) {
                 flag = true;
             }else {
-                response.sendRedirect( request.getContextPath()+"/login");
+                response.sendRedirect( request.getContextPath());
             }
 
         }

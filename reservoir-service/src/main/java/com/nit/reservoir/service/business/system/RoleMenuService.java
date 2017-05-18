@@ -16,5 +16,13 @@ public interface RoleMenuService extends AbstractService<RoleMenu>{
      * @param roleId
      * @return
      */
-    List<Menu> selectFirstByRoleId(String roleId);
+    List<Menu> selectFirstByRoleId(int roleId);
+
+    /**
+     * 根据父级ID和角色ID查询子菜单
+     * @param parentId
+     * @param roleId
+     * @return
+     */
+    List<Menu> selectChildByParentIdAndRoleId(String parentId, int roleId);
 }

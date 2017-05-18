@@ -3,15 +3,14 @@
 <mapper namespace="com.nit.reservoir.service.mapper.system.RoleMenuMapper">
     <resultMap id="BaseResultMap" type="com.nit.reservoir.service.model.system.RoleMenu">
         <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
         <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--增-->
-    <insert id="insert" parameterType="com.qiniu.fntv.service.model.system.RoleMenu">
-        INSERT INTO t_s_role_menu (
-        id,role_id,menu_id
-        )
+    <insert id="insert" parameterType="com.nit.reservoir.service.model.system.RoleMenu">
+        INSERT INTO t_s_role_menu
+        (id,role_id,menu_id)
         VALUES
         (
         #{id},
@@ -33,7 +32,7 @@
     </select>
 
     <!--根据角色ID查询一级菜单-->
-    <select id="selectFirstByRoleId" resultType="map"  parameterType="java.lang.String">
+    <select id="selectFirstByRoleId" resultType="map" >
         SELECT
         b.*
         FROM t_s_role_menu a
@@ -41,5 +40,18 @@
         WHERE b.parent_id = '10000002-0000-0000-0000-000000000000'
         AND a.role_id = #{roleId}
         ORDER BY b.sort_id
+    </select>
+
+    <!--根据父级ID和角色ID查询子菜单-->
+    <select id="selectChildByParentIdAndRoleId" resultType="map">
+        <![CDATA[
+            SELECT
+            b.*
+            FROM t_s_role_menu a
+            INNER JOIN t_s_menu b ON b.id = a.menu_id
+            AND b.id <> #{parentId}
+            AND a.role_id = #{roleId}
+            ORDER BY b.sort_id
+         ]]>
     </select>
 </mapper>

@@ -26,7 +26,12 @@ public class RoleMenuDaoImpl extends AbstractDaoImpl<RoleMenu> implements RoleMe
     }
 
     @Override
-    public List<Map<String, Object>> selectFirstByRoleId(String roleId) {
+    public List<Map<String, Object>> selectFirstByRoleId(int roleId) {
         return roleMenuMapper.selectFirstByRoleId(roleId);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectChildByParentIdAndRoleId(String parentId, int roleId) {
+        return roleMenuMapper.selectChildByParentIdAndRoleId(parentId, roleId);
     }
 }

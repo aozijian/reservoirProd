@@ -16,5 +16,13 @@ public interface RoleMenuDao extends AbstractDao<RoleMenu>{
      * @param roleId
      * @return
      */
-    List<Map<String, Object>> selectFirstByRoleId(String roleId);
+    List<Map<String, Object>> selectFirstByRoleId(int roleId);
+
+    /**
+     * 根据父级ID和角色ID查询子菜单
+     * @param parentId
+     * @param roleId
+     * @return
+     */
+    List<Map<String, Object>> selectChildByParentIdAndRoleId(String parentId, int roleId);
 }

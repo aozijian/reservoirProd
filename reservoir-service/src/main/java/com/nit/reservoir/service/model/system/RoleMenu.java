@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class RoleMenu implements Serializable{
 
     private String id;  //ID
-    private String roleId;  //角色ID
+    private int roleId;  //角色ID
     private String menuId;  //菜单ID
 
     public String getId() {
@@ -20,11 +20,11 @@ public class RoleMenu implements Serializable{
         this.id = id;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
