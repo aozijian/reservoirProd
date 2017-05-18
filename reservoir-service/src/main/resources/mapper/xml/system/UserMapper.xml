@@ -84,6 +84,24 @@
         LIMIT #{pageIndex, jdbcType=INTEGER},#{pageSize, jdbcType=INTEGER}
     </select>
 
+    <!--条件查询用户数量-->
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM t_s_user
+        WHERE 1 = 1
+        <if test="id != null and id != '' ">
+            AND id LIKE '%${id}%'
+        </if>
+        <if test="userName != null and userName != '' ">
+            AND user_name LIKE '%${userName}%'
+        </if>
+        <if test="gender != null and gender != '' ">
+            AND gender = #{gender}
+        </if>
+        <if test="roleId != null and roleId != '' ">
+            AND role_id = #{roleId}
+        </if>
+    </select>
+
     <!--根据用户名和密码查询，校验用户-->
     <select id="checkUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT * FROM t_s_user

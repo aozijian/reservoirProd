@@ -18,190 +18,250 @@
 
     <title>水库信息化管理系统</title>
 
-    <!-- Bootstrap -->
-    <link href="${ctx}/thirdParty/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="${ctx}/thirdParty/bootstrap/dist/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="${ctx}/thirdParty/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="${ctx}/thirdParty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="${ctx}/thirdParty/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="${ctx}/thirdParty/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="${ctx}/thirdParty/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="${ctx}/thirdParty/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="${ctx}/thirdParty/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="${ctx}/build/css/custom.min.css" rel="stylesheet">
+    <link href="${ctx}/thirdParty/animate/animate.min.css" rel="stylesheet">
+    <link href="${ctx}/thirdParty/style/style.min862f.css" rel="stylesheet">
+    <link href="${ctx}/thirdParty/style/styles.css" rel="stylesheet">
 
     <style type="text/css">
         body {
             font: 14px/1.5 'Microsoft YaHei',arial,tahoma,\5b8b\4f53,sans-serif;
         }
+
+        .ibox-content .btn-group > button {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
-<body class="nav-md">
-<div class="container body">
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
 
-        <!-- page content -->
-        <div class="right_col" role="main" style="margin-left: 0px">
-            <!-- top tiles -->
-            <div class="row tile_count">
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                    <div class="count">2500</div>
-                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-                    <div class="count">123.50</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-                    <div class="count green">2,500</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-                    <div class="count">4,567</div>
-                    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-                    <div class="count">2,315</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-                    <div class="count">7,325</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-            </div>
-            <!-- /top tiles -->
-
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="dashboard_graph">
-
-                        <div class="row x_title">
-                            <div class="col-md-6">
-                                <h3>Network Activities <small>Graph title sub-title</small></h3>
-                            </div>
-                            <div class="col-md-6">
-                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                </div>
-                            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><i class="fa fa-info"></i> 用户信息管理</h5>
+                        <div class="ibox-tools pull-right">
+                            <a class="collapse-link" title="收起/展开">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link" title="关闭">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"
+                                    aria-expanded="true">
+                                <i class="glyphicon glyphicon-edit"></i> 操作 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> 添加用户</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除所选用户</a></li>
+                            </ul>
                         </div>
 
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <div id="chart_plot_01" class="demo-placeholder"></div>
+                        <%--搜索框--%>
+                        <form class="form-inline" style="float: right">
+
+                            <div class="form-group">
+                                <input id="idSearch" class="form-control" type="text" placeholder="用户ID" />
+                                <input id="userNameSearch" class="form-control" type="text" placeholder="用户名" />
+                                <select class="form-control" id="roleIdSearch" name="roleId">
+                                    <option>用户角色</option>
+                                </select>
+                                <select class="form-control" id="genderSearch" name="roleId">
+                                    <option>用户性别</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                            <button type="button" id="searchBtn" class="btn btn-primary"><i class="fa fa-search"></i>筛选</button>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table id="userList" data-mobile-responsive="true"></table>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                            <div class="x_title">
-                                <h2>Top Campaign Performance</h2>
-                                <div class="clearfix"></div>
-                            </div>
-
-                            <div class="col-md-12 col-sm-12 col-xs-6">
-                                <div>
-                                    <p>Facebook Campaign</p>
-                                    <div class="">
-                                        <div class="progress progress_sm" style="width: 76%;">
-                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p>Twitter Campaign</p>
-                                    <div class="">
-                                        <div class="progress progress_sm" style="width: 76%;">
-                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-6">
-                                <div>
-                                    <p>Conventional Media</p>
-                                    <div class="">
-                                        <div class="progress progress_sm" style="width: 76%;">
-                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p>Bill boards</p>
-                                    <div class="">
-                                        <div class="progress progress_sm" style="width: 76%;">
-                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="clearfix"></div>
                     </div>
                 </div>
-
             </div>
-            <br />
 
-        </div>
-        <!-- /page content -->
+    </div>
 </div>
 
-<!-- jQuery -->
 <script src="${ctx}/thirdParty/jquery/jquery-2.1.4.min.js"></script>
-<!-- Bootstrap -->
+<script src="${ctx}/js/format.js"></script>
 <script src="${ctx}/thirdParty/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="${ctx}/thirdParty/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="${ctx}/thirdParty/nprogress/nprogress.js"></script>
-<!-- Chart.js -->
-<script src="${ctx}/thirdParty/Chart.js/dist/Chart.min.js"></script>
-<!-- gauge.js -->
-<script src="${ctx}/thirdParty/gauge.js/dist/gauge.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="${ctx}/thirdParty/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="${ctx}/thirdParty/iCheck/icheck.min.js"></script>
-<!-- Skycons -->
-<script src="${ctx}/thirdParty/skycons/skycons.js"></script>
-<!-- Flot -->
-<script src="${ctx}/thirdParty/Flot/jquery.flot.js"></script>
-<script src="${ctx}/thirdParty/Flot/jquery.flot.pie.js"></script>
-<script src="${ctx}/thirdParty/Flot/jquery.flot.time.js"></script>
-<script src="${ctx}/thirdParty/Flot/jquery.flot.stack.js"></script>
-<script src="${ctx}/thirdParty/Flot/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="${ctx}/thirdParty/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="${ctx}/thirdParty/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="${ctx}/thirdParty/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="${ctx}/thirdParty/DateJS/build/date.js"></script>
-<!-- JQVMap -->
-<script src="${ctx}/thirdParty/jqvmap/dist/jquery.vmap.js"></script>
-<script src="${ctx}/thirdParty/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="${ctx}/thirdParty/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="${ctx}/thirdParty/moment/min/moment.min.js"></script>
-<script src="${ctx}/thirdParty/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- Custom Theme Scripts -->
-<script src="${ctx}/build/js/custom.min.js"></script>
+<script src="${ctx}/thirdParty/jquery/peity/jquery.peity.min.js"></script>
+<script src="${ctx}/thirdParty/content/content.min.js"></script>
+<script src="${ctx}/thirdParty/jquery/jquery-validation-1.15.0/jquery.validate.min.js"></script>
+<script src="${ctx}/thirdParty/bootbox/bootbox.min.js"></script>
+<script src="${ctx}/thirdParty/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="${ctx}/thirdParty/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 
 <script>
+    $(document).ready(function() {
+        loadTable();
+    });
 
+    /**
+     * 加载表
+     */
+    function loadTable() {
+        var $table = $('#userList');
+        $table.bootstrapTable({
+            method:'get',
+            url:'${ctx}/admin/system/user/getUserList.do',
+            dataType: "json",
+            striped: true,	 //使表格带有条纹
+            pagination: true,	//在表格底部显示分页工具栏
+            pageSize: 10,
+            pageList: [10, 20, 50, 100, 200, 500],
+
+            queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+            //查询参数,每次调用是会带上这个参数，可自定义
+            queryParams: function(params) {
+                var idSearch = $("#idSearch").val();
+                var userNameSearch = $("#userNameSearch").val();
+                var roleIdSearch = $("#roleIdSearch").val();
+                var genderSearch = $("#genderSearch").prop("value");
+                return {
+                    pageIndex : params.offset,
+                    pageSize : params.limit,
+                    idSearch : idSearch,
+                    userNameSearch : userNameSearch,
+                    roleIdSearch : roleIdSearch,
+                    genderSearch : genderSearch
+                };
+            },
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+
+            idField: "id",  //标识哪个字段为id主键
+            showToggle: true,   //名片格式
+            cardView: true,//设置为True时显示名片（card）布局
+            showColumns: true, //显示隐藏列
+            showRefresh: true,  //显示刷新按钮
+            search: false,//是否显示右上角的搜索框
+            columns:[{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: '用户ID',
+                sortable: true
+            }, {
+                field: 'userName',
+                title: '用户名',
+                sortable: true
+            }, {
+                field: 'roleId',
+                title: '角色',
+                sortable: true,
+                formatter: function (value) {
+                    if (value == 1) {
+                        return '后台管理员';
+                    } else if (value == 2) {
+                        return '水库监测员';
+                    } else if (value == 3) {
+                        return '水库系统管理员';
+                    } else if (value == 4) {
+                        return '水库调度员';
+                    } else if (value == 5) {
+                        return '超级管理员';
+                    } else {
+                        return '';
+                    }
+                }
+            }, {
+                field: 'gender',
+                title: '性别',
+                sortable: true,
+                formatter: function (value) {
+                    if (value == 1) {
+                        return '男';
+                    } else {
+                        return '女';
+                    }
+                }
+            }, {
+                field: 'createTime',
+                title: '创建时间',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    if (value == "") {
+                        return "";
+                    } else {
+                        var date = new Date(value);
+                        return date.format("yyyy-MM-dd hh:mm:ss");
+                    }
+                }
+            }, {
+                field: 'modifyTime',
+                title: '修改时间',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    if (value == "" || null == value) {
+                        return "";
+                    } else {
+                        var date = new Date(value);
+                        return date.format("yyyy-MM-dd hh:mm:ss");
+                    }
+                }
+            }, {
+                title: '操作',
+                align: 'center',
+                formatter: operateFormatter
+            }],
+            formatLoadingMessage: function () {
+                return "请稍等，正在加载中...";
+            },
+            formatNoMatches: function () {  //没有匹配的结果
+                return '无符合条件的记录';
+            },
+            onLoadError: function (data) {
+                $('#articleList').bootstrapTable('removeAll');
+            },
+            onDblClickRow: function (row) {
+                showDetails(row.id);
+            },
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                return '显示第 ' + pageFrom + ' 到第 ' + pageTo + ' 条记录，总共 ' + totalRows + ' 条记录';
+            },
+            formatRecordsPerPage: function (pageNumber) {
+                return '每页显示 ' + pageNumber + ' 条记录';
+            }
+        });
+    }
+
+    /**
+     * 操作
+     * @param value
+     * @param row
+     * @param index
+     * @returns {string}
+     */
+    function operateFormatter(value, row, index) {
+        return [
+            "<button class='btn btn-xs btn-default' onclick='edit(\""+row.id+"\" , \""+row.type+"\")'>编辑</button>"
+        ].join("");
+    }
+
+    /**
+     * 查看详情
+     * @param id
+     */
+    function showDetails(id) {
+
+    }
+
+    //搜索
+    $("#searchBtn").click(function () {
+        $('#userList').bootstrapTable('refresh');
+    });
 
 </script>
 

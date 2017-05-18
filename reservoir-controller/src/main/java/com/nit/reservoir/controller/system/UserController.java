@@ -1,6 +1,8 @@
 package com.nit.reservoir.controller.system;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.nit.reservoir.core.bean.JsonResult;
 import com.nit.reservoir.core.contants.Constants;
 import com.nit.reservoir.core.log.DailyLog;
@@ -16,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aozijian on 2017/4/20.
@@ -60,6 +65,43 @@ public class UserController {
             return JSON.toJSONString(JsonResult.createSuccess(result));
         } catch (Exception e) {
             DailyLog.getLog().error("[水库信息化系统]用户登录异常，未知异常", e);
+            return JSON.toJSONString(JsonResult.createFailed(Constants.ResponseCode.ERROR_UNKNOWN, "未知异常"));
+        }
+    }
+
+    /**
+     * 获取用户列表
+     * @param id
+     * @param userName
+     * @param roleId
+     * @param gender
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getUserList", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
+    public String getUserList(String id, String userName, Integer roleId, Integer gender, Integer pageIndex, Integer pageSize) {
+        if (null == pageIndex || pageIndex < 1)
+            pageIndex = 1;
+        if (null == pageSize || pageSize < 1)
+            pageSize = 10;
+        if (pageSize > 20)
+            pageSize = 20;
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("id", id);
+            params.put("userName", userName);
+            params.put("roleId", roleId);
+            params.put("gender", gender);
+            params.put("pageIndex", pageSize * (pageIndex - 1));
+            params.put("pageSize", pageSize);
+            List<User> userList = userService.selectByParams(params);
+            int total = userService.count(params);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("total", total);
+            jsonObject.put("rows", userList);
+            return JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect);
+        } catch (Exception e) {
+            DailyLog.getLog().error("[水库信息化系统]获取用户列表异常", e);
             return JSON.toJSONString(JsonResult.createFailed(Constants.ResponseCode.ERROR_UNKNOWN, "未知异常"));
         }
     }
