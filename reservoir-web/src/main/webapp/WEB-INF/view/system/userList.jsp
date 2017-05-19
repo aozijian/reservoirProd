@@ -60,7 +60,7 @@
                                 <i class="glyphicon glyphicon-edit"></i> 操作 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> 添加用户</a></li>
+                                <li><a href="#" onclick="addUser();"><i class="fa fa-plus-circle" aria-hidden="true"></i> 添加用户</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除所选用户</a></li>
                             </ul>
@@ -73,10 +73,10 @@
                                 <input id="idSearch" class="form-control" type="text" placeholder="用户ID" />
                                 <input id="userNameSearch" class="form-control" type="text" placeholder="用户名" />
                                 <select class="form-control" id="roleIdSearch" name="roleId">
-                                    <option>用户角色</option>
+                                    <option value="0">用户角色</option>
                                 </select>
                                 <select class="form-control" id="genderSearch" name="roleId">
-                                    <option>用户性别</option>
+                                    <option value="0">用户性别</option>
                                     <option value="1">男</option>
                                     <option value="2">女</option>
                                 </select>
@@ -103,6 +103,7 @@
 <script src="${ctx}/thirdParty/bootbox/bootbox.min.js"></script>
 <script src="${ctx}/thirdParty/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="${ctx}/thirdParty/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="${ctx}/thirdParty/layer/layer.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -133,17 +134,17 @@
                 return {
                     pageIndex : params.offset,
                     pageSize : params.limit,
-                    idSearch : idSearch,
-                    userNameSearch : userNameSearch,
-                    roleIdSearch : roleIdSearch,
-                    genderSearch : genderSearch
+                    id : idSearch,
+                    userName : userNameSearch,
+                    roleId : roleIdSearch,
+                    gender : genderSearch
                 };
             },
             sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
 
             idField: "id",  //标识哪个字段为id主键
             showToggle: true,   //名片格式
-            cardView: true,//设置为True时显示名片（card）布局
+            cardView: false,//设置为True时显示名片（card）布局
             showColumns: true, //显示隐藏列
             showRefresh: true,  //显示刷新按钮
             search: false,//是否显示右上角的搜索框
@@ -263,6 +264,23 @@
         $('#userList').bootstrapTable('refresh');
     });
 
+    /**
+     * 添加用户
+     */
+    function addUser() {
+        layer.open({
+            type: 2,
+            title: '添加用户',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['1000px', '550px'],
+            content: '${ctx}/admin/system/user/jumpToEdit.do',
+            end: function () {
+                $("#userList").bootstrapTable('refresh');
+            }
+        });
+    }
 </script>
 
 </body>

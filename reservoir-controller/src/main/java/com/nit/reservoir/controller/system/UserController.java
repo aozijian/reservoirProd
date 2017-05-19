@@ -44,6 +44,19 @@ public class UserController {
     }
 
     /**
+     * 跳转到用户编辑用户页
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/jumpToEdit", method = RequestMethod.GET)
+    public ModelAndView jumpToEdit(Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("system/userEdit");
+        modelAndView.addObject("id", id);
+        return modelAndView;
+    }
+
+    /**
      * 用户登录
      * @param userName  用户名
      * @param password  密码
